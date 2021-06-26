@@ -32,13 +32,9 @@ namespace TestsLab6
 
             try
             {
-
-                //var email = _driver.FindElement(By.XPath("//*[@id='content1']/app-login/ion-content/div/form/ion-item[1]/ion-input"));
-                //var email = _driver.FindElement(By.Name("email"));
                 var email = _driver.FindElement(By.Name("email")).FindElement(By.Name("email"));
                 email.Click();
                 email.SendKeys("mary.sue@gmail.com");
-                wait(1000);
 
                 var password = _driver.FindElement(By.Name("password")).FindElement(By.Name("password")); ;
                 password.Click();
@@ -47,64 +43,22 @@ namespace TestsLab6
 
                 var submit = _driver.FindElement(By.TagName("ion-button"));
                 submit.Click();
-                wait(2000);
 
-                var ionTitle = _driver.FindElement(By.XPath("//ion-title"));
-                if (ionTitle.Text == "Movies")
+                wait(5000);
+
+                var titles = _driver.FindElements(By.TagName("ion-title"));
+                if (titles[0].GetAttribute("textContent") == "Movies")
                 {
                     isLoggedIn = true;
                 }
-
-                Assert.IsTrue(isLoggedIn);
             }
             catch (NoSuchElementException)
             {
                 Assert.Fail("User is not logged in.");
             }
+
+            Assert.IsTrue(isLoggedIn);
         }
-
-        /* //element is not interactable
-        [Test]
-        public void LoginIsFunctional()
-        {
-            _driver.Url = "http://localhost:4200/login";
-            bool isLoggedIn = false;
-
-            wait(2000);
-
-            try
-            {
-
-                //var email = _driver.FindElement(By.XPath("//*[@id='content1']/app-login/ion-content/div/form/ion-item[1]/ion-input"));
-                //var email = _driver.FindElement(By.Name("email"));
-                 _driver.FindElement(By.TagName("ion-input")).SendKeys("aaa");
-                email.Click();
-                email.SendKeys("mary.sue@gmail.com");
-                wait(1000);
-                
-                var password = _driver.FindElement(By.Name("password"));
-                password.Click();
-                password.SendKeys("asdASD1234!@#$");
-                wait(1000);
-                
-                var submit = _driver.FindElement(By.TagName("ion-button"));
-                submit.Click();
-                wait(2000);
-
-                var ionTitle = _driver.FindElement(By.XPath("//ion-title"));
-                if (ionTitle.Text == "Movies")
-                {
-                    isLoggedIn = true;
-                }
-
-                Assert.IsTrue(isLoggedIn);
-            }
-            catch (NoSuchElementException)
-            {
-                Assert.Fail("User is not logged in.");
-            }
-        }
-        */
 
         /*
         [Test]
